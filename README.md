@@ -3,10 +3,10 @@ Dribbble.js is a single file, library agnositc script for adding your recent Dri
 
 ```javascript
 <script src="scripts/dribbble.js" type="text/javascript"></script>
-<scripttype="text/javascript">
+<script type="text/javascript">
     getShotsForID(2151, 'shots');
 </script>
-```
+```
 
 The paramets for getShotsForID are as follows
 
