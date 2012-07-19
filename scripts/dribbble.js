@@ -38,8 +38,10 @@ function getShotsForID (dribbbleID, elm, limit)
 			for (var i = 0; i < limit; i++)
 			{
 				var shot = shots.shots[i];
-				htmlString = htmlString+"\n<li class=\"dribbble_shot\">"
-				htmlString = htmlString+"<img src=\""+shot.image_url+"\" alt=\""+shot.title+"\" />"
+				htmlString = htmlString+"\n<li class=\"dribbble_shot\">";
+				htmlString = htmlString+"<a href=\""+shot.url+"\">";
+				htmlString = htmlString+"<img src=\""+shot.image_url+"\" alt=\""+shot.title+"\" />";
+				htmlString = htmlString+"</a>";
 				htmlString = htmlString+"</li>\n";
 			}
 			
