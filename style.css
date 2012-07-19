@@ -1,0 +1,65 @@
+body {
+	background-color: #fffefd;
+	margin: 0px auto;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::selection, ::-moz-selection {
+	background: #ff5c5c;
+	color: #FFF;
+	text-shadow: #892c2d 0 2px 2px;
+}
+
+h1 {
+	color: #ff5c5c;
+	margin: 0;
+	padding: 0;
+	font-weight: 200;
+	font-size: 28px;
+}
+
+p {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 24px;
+}
+
+code {
+	font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace;
+	font-size: 14px;
+	line-height: 22px;
+	padding: 10px 10px;
+	background: #FFF;
+	display: block;
+	box-shadow: 0px 0px 8px #CCC;
+	border-radius: 4px;
+}
+
+#content {
+	margin: 30px auto;
+	width: 850px;
+}
+
+#shots {
+	margin: 20px 0;
+}
+
+#shots ul {
+	list-style: none;
+	padding: 0;
+}
+
+#shots ul li {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+#shots ul li img {
+	width: 265px;
+	border: 4px #EEE solid;
+}
+
+#shots ul li:nth-child(2) img{
+	margin: 0 10px 0 10px;
+}
