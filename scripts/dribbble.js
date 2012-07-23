@@ -7,9 +7,9 @@
 /**
 * Fetch and parse Dribbble JSON
 *
-* @param dribbbleID   int      Dribbble User ID
-* @param elm          string   Dom Element ID to add the shots to (optional, defaults to 'shots')
-* @param limit        int      Number of shots to draw (optional, defaults to 3)
+* @param dribbbleID   int/string  Dribbble User ID or username
+* @param elm          string      Dom Element ID to add the shots to (optional, defaults to 'shots')
+* @param limit        int         Number of shots to draw (optional, defaults to 3)
 */
 
 // Define Global Vars

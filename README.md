@@ -4,14 +4,14 @@ Dribbble.js is a single file, library agnositc script for adding your recent Dri
 ```javascript
 <script src="scripts/dribbble.js" type="text/javascript"></script>
 <script type="text/javascript">
-    getShotsForID(2151, 'shots');
+    getShotsForID('tim', 'shots');
 </script>
 ```
 
 The paramets for getShotsForID are as follows
 
 ```javascript
-getShotsForID (dribble user id, element ID to add the shots to, number of shots)
+getShotsForID (dribble user id or username, element ID to add the shots to, number of shots)
 ```
 
 For a more detailed example, check out the demo page source and the script file itself.
