@@ -12,41 +12,43 @@
 * @param limit        int      Number of shots to draw (optional, defaults to 3)
 */
 
+// Define Global Vars
+var userID, shotLimit, element = '';
+
 function getShotsForID (dribbbleID, elm, limit)
 {	
 	/* Initialise funcation variables */
-	limit = (!limit)? 3 : limit;
-	elm = (!elm)? 'shots' : elm;
-	var apirequest = new XMLHttpRequest();  
-	var url = 'http://api.dribbble.com/players/'+dribbbleID.toString()+'/shots';  
-	var shots = [];
+	shotLimit = (!limit)? 3 : limit;
+	element = (!elm)? 'shots' : elm;
+	userID = ''+dribbbleID;
 	
-	/* Begin XMLHttpRequest/AJAX request */
-	apirequest.open('GET', url, true);  
-	apirequest.onreadystatechange = apiRequestHandler;  
-	apirequest.send();  
+	document.addEventListener('DOMContentLoaded', function () {
+		var url = 'http://api.dribbble.com/players/'+userID+'/shots?callback=parseShots';  
+		var shots = [];
+		
+		/* Insert JSONP Script tag*/
+		var myscript = document.createElement('script');
+		myscript.src = url;
+		document.body.appendChild(myscript);
+	});
+}
+
+/* JSONP callback handler */
+function parseShots (shots)
+{	
+	var htmlString = "\n<ul>\n"
 	
-	/* Remote request handler */
-	function apiRequestHandler ()
+	for (var i = 0; i < shotLimit; i++)
 	{
-		/* When readyState becomes "DONE" draw shots */
-		if(apirequest.readyState == 4)
-		{
-			shots = JSON.parse(apirequest.response);
-			var htmlString = "\n<ul>\n"
-			
-			for (var i = 0; i < limit; i++)
-			{
-				var shot = shots.shots[i];
-				htmlString = htmlString+"\n<li class=\"dribbble_shot\">";
-				htmlString = htmlString+"<a href=\""+shot.url+"\">";
-				htmlString = htmlString+"<img src=\""+shot.image_url+"\" alt=\""+shot.title+"\" />";
-				htmlString = htmlString+"</a>";
-				htmlString = htmlString+"</li>\n";
-			}
-			
-			htmlString = htmlString + "\n</ul>\n";
-			document.getElementById(elm).innerHTML = htmlString;
-		}
-	}	
+		var shot = shots.shots[i];
+		htmlString = htmlString+"\n<li class=\"dribbble_shot\">";
+		htmlString = htmlString+"<a href=\""+shot.url+"\">";
+		htmlString = htmlString+"<img src=\""+shot.image_url+"\" alt=\""+shot.title+"\" />";
+		htmlString = htmlString+"</a>";
+		htmlString = htmlString+"</li>\n";
+	}
+	
+	htmlString = htmlString + "\n</ul>\n";
+				
+	document.getElementById(element).innerHTML = htmlString;
 }
