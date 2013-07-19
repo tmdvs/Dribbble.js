@@ -6,7 +6,7 @@
     <link href="style.css" rel="stylesheet" type="text/css">
     <script src="scripts/dribbble.js" type="text/javascript"></script>
     <script type="text/javascript">
-        getShotsForID('dribbble', 'shots', 3);
+        getShotsForID(['dribbble', 'tim'], 'shots', 3);
     </script>
 </head>
 <body>
@@ -19,14 +19,14 @@
         <code>
             &lt;script src="scripts/dribbble.js" type="text/javascript"&gt;&lt;/script&gt;<br/>
             &lt;scripttype="text/javascript"&gt;<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;getShotsForID('tim', 'shots');<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;getShotsForID(['tim','dribbble'], 'shots');<br/>
             &lt;/script&gt;
         </code>
         <p>
             The paramets for getShotsForID are as follows
         </p>
         <code>
-            getShotsForID (<em>dribble user id or username</em>, <em>element ID to add the shots to</em>, <em>number of shots</em>)
+            getShotsForID (<em>array of dribble user id or usernames</em>, <em>element ID to add the shots to</em>, <em>number of shots</em>)
         </code>
         <p>
             For a more detailed example, check out the source of this page and the script file itself.
