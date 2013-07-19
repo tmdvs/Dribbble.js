@@ -13,26 +13,42 @@
 */
 
 // Define Global Vars
-var userID, shotLimit, element = '';
-var usersToLoad = 0;
-var all_shots = [];
+var dribbble = {
+	// How many shots to display
+	shotLimit : 3,
+	// The div ID to draw to
+	element : 'shots',
+	// How many users we're loading
+	usersToLoad : 0,
+	// All API results
+	allShots : [],
+	// Complete callback
+	complete : function () {},
+	// Shots sort function
+	order : function (a,b) {
+	  if (a.id > b.id)
+		 return -1;
+	  if (a.id < b.id)
+		return 1;
+	  return 0;
+	}
+}
 
-function getShotsForID (dribbbleID, elm, limit)
+function getShotsForID (users, elm, limit, callback)
 {	
 	/* Initialise funcation variables */
-	shotLimit = (!limit)? 3 : limit;
-	element = (!elm)? 'shots' : elm;
+	dribbble.shotLimit = (!limit)? 3 : limit;
+	dribbble.element = (!elm)? 'shots' : elm;
+	dribbble.complete = callback;
 
-	usersToLoad = dribbbleID.length;
+	dribbble.usersToLoad = users.length;
 	
 	document.addEventListener('DOMContentLoaded', function () {
 		
-		for(indx in dribbbleID)
+		for(var indx in users)
 		{
-			var url = 'http://api.dribbble.com/players/'+dribbbleID[indx]+'/shots?callback=parseShots';  
-			var shots = [];
-	
 			/* Insert JSONP Script tag*/
+			var url = 'http://api.dribbble.com/players/'+users[indx]+'/shots?callback=parseShots'; 	
 			var myscript = document.createElement('script');
 			myscript.src = url;
 			document.body.appendChild(myscript);
@@ -44,27 +60,18 @@ function getShotsForID (dribbbleID, elm, limit)
 /* JSONP callback handler */
 function parseShots (shots)
 {	
-	usersToLoad--;
-	all_shots.push.apply(all_shots, shots.shots);
-	
-	// Our basic compare to order shots
-	function compare(a,b) {
-	  if (a.id > b.id)
-		 return -1;
-	  if (a.id < b.id)
-		return 1;
-	  return 0;
-	}
+	dribbble.usersToLoad--;
+	dribbble.allShots.push.apply(dribbble.allShots, shots.shots);
 
-	if(usersToLoad == 0)
+	if(dribbble.usersToLoad === 0)
 	{
-		all_shots.sort(compare)
+		dribbble.allShots.sort(dribbble.order)
 		
 		var htmlString = "\n<ul>\n"
 
-		for (var i = 0; i < shotLimit; i++)
+		for (var i = 0; i < dribbble.shotLimit; i++)
 		{
-			var shot = all_shots[i];
+			var shot = dribbble.allShots[i];
 			htmlString = htmlString+"\n<li class=\"dribbble_shot\">";
 			htmlString = htmlString+"<a href=\""+shot.url+"\">";
 			htmlString = htmlString+"<img src=\""+shot.image_url+"\" alt=\""+shot.title+"\" />";
@@ -74,6 +81,7 @@ function parseShots (shots)
 
 		htmlString = htmlString + "\n</ul>\n";
 
-		document.getElementById(element).innerHTML = htmlString;
+		document.getElementById(dribbble.element).innerHTML = htmlString;
+		dribbble.complete();
 	}
 }
