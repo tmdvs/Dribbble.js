@@ -39,7 +39,7 @@ function getShotsForID (users, elm, limit, callback)
 	/* Initialise funcation variables */
 	dribbble.shotLimit = (!limit)? 3 : limit;
 	dribbble.element = (!elm)? 'shots' : elm;
-	dribbble.complete = callback;
+	dribbble.complete = callback || dribbble.complete;
 
 	dribbble.usersToLoad = users.length;
 	
